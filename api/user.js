@@ -19,9 +19,7 @@ module.exports = {
               })
             } else {
               console.log('Created user: ' + req.body.username)
-              res.status(201).json({
-                success: true
-              })
+              res.status(201).json({})
             }
           })
         }, (err) => {
@@ -60,7 +58,7 @@ module.exports = {
                 }
               })
             } else {
-              res.status(400).json({
+              res.status(401).json({
                 error: 'Username or password is incorrect.'
               })
             }
@@ -71,13 +69,13 @@ module.exports = {
             })
           })
         } else {
-          res.status(400).json({
+          res.status(401).json({
             error: 'Username or password is incorrect.'
           })
         }
       }, (err) => {
         console.error(err)
-        res.status(400).json({
+        res.status(401).json({
           error: 'Username or password is incorrect.'
         })
       })

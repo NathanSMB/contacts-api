@@ -24,8 +24,7 @@ describe('API', () => {
           'Content-Type': 'application/json'
         }
       }).then((body) => {
-        body.should.have.property('success')
-        body.success.should.equal(true)
+        chai.assert(JSON.stringify(body) === '{}')
       })
     })
     it('#POST', () => {
