@@ -4,6 +4,7 @@
   "description": "Contact api backend built for Centralway's hiring process.",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "./node_modules/mocha/bin/mocha"
   },
   "author": "Nathanael Burchill",
