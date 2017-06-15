@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const config = require('./config')
 
+mongoose.Promise = global.Promise
+
 mongoose.connect('mongodb://127.0.0.1:' + config.mongoPort)
 
 module.exports = {
