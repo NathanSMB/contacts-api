@@ -14,7 +14,7 @@ module.exports = {
             if (err) {
               console.error(err)
               res.status(500).json({
-                error: 'Error creating contacting. Please try again.'
+                error: 'Error creating contact. Please try again.'
               })
             } else {
               console.log('Created contact: ' + req.body.first_name + ' ' + req.body.last_name)
@@ -24,13 +24,13 @@ module.exports = {
             }
           })
         } else {
-          res.status(400).json({
+          res.status(401).json({
             error: 'Could not find session. Please login.'
           })
         }
       }, (err) => {
         console.error(err)
-        res.status(400).json({
+        res.status(500).json({
           error: 'Error finding session.'
         })
       })
@@ -62,7 +62,7 @@ module.exports = {
             })
           })
         } else {
-          res.status(400).json({
+          res.status(401).json({
             error: 'Could not find session. Please login.'
           })
         }
