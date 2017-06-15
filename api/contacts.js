@@ -74,7 +74,6 @@ module.exports = {
       })
     } else {
       res.status(400).json({
-        success: false,
         error: 'Something was missing from the request.'
       })
     }

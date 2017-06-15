@@ -25,13 +25,13 @@ module.exports = {
             })
           })
         } else {
-          res.status(400).json({
+          res.status(401).json({
             error: 'Could not find session. Please login.'
           })
         }
       }, (err) => {
         console.error(err)
-        res.status(400).json({
+        res.status(500).json({
           error: 'Error finding session.'
         })
       })
@@ -54,13 +54,13 @@ module.exports = {
             })
           })
         } else {
-          res.status(400).json({
+          res.status(401).json({
             error: 'Could not find session. Please login.'
           })
         }
       }, (err) => {
         console.error(err)
-        res.status(400).json({
+        res.status(500).json({
           error: 'Error finding session.'
         })
       })

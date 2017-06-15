@@ -34,7 +34,7 @@ module.exports = {
         }
       }, (err) => {
         console.error(err)
-        res.status(400).json({
+        res.status(500).json({
           error: 'Error finding session.'
         })
       })
