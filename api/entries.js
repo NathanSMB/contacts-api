@@ -6,27 +6,38 @@ module.exports = {
     if (req.get('Token') && req.body && req.body.phone) {
       db.Session.findOne({ _id: req.get('Token') }).then((session) => {
         if (session) {
-          let pn = phone(req.body.phone)
-          if (pn[0]) {
-            db.Contact.update({ _id: req.params.contactId }, {
-              $push: {
-                phones: pn[0] // pn is an array containing the phone number[0] and country code[1].
+          db.Contact.findOne({ _id: req.params.contactId }).then((contact) => {
+            if (contact.ownerId === session.userId) {
+              let pn = phone(req.body.phone)
+              if (pn[0]) {
+                db.Contact.update({ _id: req.params.contactId }, {
+                  $push: {
+                    phones: pn[0] // pn is an array containing the phone number[0] and country code[1].
+                  }
+                }).then(() => {
+                  res.status(201).json({
+                    id: req.params.contactId
+                  })
+                }, (err) => {
+                  console.error(err)
+                  res.status(500).json({
+                    error: 'Could not update contact. Please try again.'
+                  })
+                })
+              } else {
+                res.status(400).json({
+                  error: 'Invalid phone number format. It should be an internationally formatted phone number.'
+                })
               }
-            }).then(() => {
-              res.status(201).json({
-                id: req.params.contactId
+            } else {
+              res.status(401).json({
+                error: 'You do not own this contact.'
               })
-            }, (err) => {
-              console.error(err)
-              res.status(500).json({
-                error: 'Could not update contact. Please try again.'
-              })
-            })
-          } else {
-            res.status(400).json({
-              error: 'Invalid phone number format. It should be an internationally formatted phone number.'
-            })
-          }
+            }
+          }, (err) => {
+            console.error(err)
+            res.status(500)
+          })
         } else {
           res.status(400).json({
             error: 'Could not find session. Please login.'
@@ -35,7 +46,7 @@ module.exports = {
       }, (err) => {
         console.error(err)
         res.status(500).json({
-          error: 'Error finding session.'
+          error: 'Could not update contact. Please try again.'
         })
       })
     } else {
