@@ -24,11 +24,11 @@ module.exports = {
             })
           } else {
             res.status(400).json({
-              error: 'Invalid phone number. It should be an internationally formatted phone number.'
+              error: 'Invalid phone number format. It should be an internationally formatted phone number.'
             })
           }
         } else {
-          res.status(401).json({
+          res.status(400).json({
             error: 'Could not find session. Please login.'
           })
         }
