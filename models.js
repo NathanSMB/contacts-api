@@ -3,7 +3,7 @@ const config = require('./config')
 
 mongoose.Promise = global.Promise
 
-mongoose.connect('mongodb://127.0.0.1:' + config.mongoPort)
+mongoose.connect('mongodb://127.0.0.1:' + config.mongoPort + '/contacts_api')
 
 module.exports = {
   User: mongoose.model('User', {
